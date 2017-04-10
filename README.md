@@ -5,8 +5,8 @@
 #### Clone this repo
 
 ```
-git clone 
-cd 
+git clone https://github.com/pierman1/real-time-web.git
+cd real-time-web
 ```
 
 Install the dependencies:
@@ -14,13 +14,6 @@ Install the dependencies:
 ```$xslt
 npm install
 ```
-
-#### Additional
-
-**Browserify**
-
-
-
 
 
 **Resources:**

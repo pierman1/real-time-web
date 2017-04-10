@@ -1,0 +1,41 @@
+<footer>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        (function () {
+
+            var messageList = document.querySelector('#messages');
+
+            var socket = io();
+
+            var form = document.querySelector('form')
+
+            form.addEventListener('submit', function(){
+                naamvanFunctie(event);
+            });
+
+            function naamvanFunctie(event){
+
+                event.preventDefault();
+
+                var messageElement = document.querySelector('#m');
+                var messageValue = messageElement.value;
+
+                socket.emit('chat message', messageValue);
+
+                messageElement.value = '';
+
+                return false;
+            }
+
+            socket.on('chat message', function(msg){
+
+                var m = document.createElement('li');
+                m.innerHTML = msg;
+                messageList.appendChild(m);
+
+            });
+
+        })();
+    </script>
+</footer>
+</body>

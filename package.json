@@ -1,0 +1,16 @@
+{
+  "name": "Real-time-web",
+  "version": "0.0.1",
+  "description": "my first socket app",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.15.2",
+    "socket.io": "^1.7.3",
+    "browserify": "^14.1.0"
+  },
+  "devDependencies": {
+    "browserify": "^14.1.0"
+  }
+}

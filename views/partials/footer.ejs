@@ -3,39 +3,104 @@
     <script>
         (function () {
 
-            var messageList = document.querySelector('#messages');
+            if (window.location.pathname === '/chat') {
 
-            var socket = io();
+                var messageList = document.querySelector('#messages');
 
-            var form = document.querySelector('form')
+                var socket = io();
 
-            form.addEventListener('submit', function(){
-                naamvanFunctie(event);
-            });
+                var form = document.querySelector('.chat-form');
 
-            function naamvanFunctie(event){
+                form.addEventListener('submit', function(){
+                    naamvanFunctie(event);
+                });
 
-                event.preventDefault();
+                function naamvanFunctie(event){
 
-                var messageElement = document.querySelector('#m');
-                var messageValue = messageElement.value;
+                    event.preventDefault();
 
-                socket.emit('chat message', messageValue);
+                    var messageElement = document.querySelector('#m');
+                    var messageValue = messageElement.value;
 
-                messageElement.value = '';
+                    socket.emit('chat message', messageValue);
+                    socket.emit('user', 'Pierre');
 
-                return false;
+                    messageElement.value = '';
+
+                    return false;
+                }
+
+                socket.on('chat message', function(msg){
+
+                    // send the clients id to the client itself.
+                    client.send(client.id);
+
+                    var m = document.createElement('li');
+                    var user = document.createElement('span');
+
+                    console.log(localStorage.getItem('userName'));
+
+                    user.innerHTML = localStorage.getItem('userName');
+
+                    m.innerHTML = msg;
+                    messageList.appendChild(user);
+                    messageList.appendChild(m);
+
+                });
+
             }
 
-            socket.on('chat message', function(msg){
-
-                var m = document.createElement('li');
-                m.innerHTML = msg;
-                messageList.appendChild(m);
-
-            });
 
         })();
+
+        (function () {
+
+            if (window.location.pathname === '/login') {
+
+                var socket = io();
+
+                var loginForm = document.querySelector('.form--login');
+                var loginUserName = document.querySelector('#login-input').value;
+
+                loginForm.addEventListener('submit', function(){
+                    userLogin(event);
+                });
+
+                function userLogin(event){
+
+                    event.preventDefault();
+
+                    var input = document.querySelector('#login-input');
+                    var userName = input.value;
+
+//                    socket.emit('login', userName);
+
+                    localStorage.setItem('userName', userName);
+
+                    console.log(localStorage.getItem('userName'));
+
+
+
+                    input.value = '';
+
+                    return false;
+                }
+
+//                socket.on('login', function(userName){
+//
+//                  console.log(userName);
+//
+//                  var displayUser = document.querySelector('.user-name');
+//                  displayUser.innerHTML = userName;
+//
+//
+//                });
+
+            }
+
+
+        })();
+
     </script>
 </footer>
 </body>

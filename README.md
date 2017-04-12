@@ -1,5 +1,12 @@
 # real-time-web
 
+Deployed app:
+
+https://pierman1-chat.herokuapp.com/
+
+(nog geen enkele opmaak)!!!
+
+
 ### Set it up
 
 #### Clone this repo
